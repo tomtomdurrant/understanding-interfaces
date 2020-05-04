@@ -195,6 +195,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonRepository.Factory\PersonRepository.Factory.csproj">
+      <Project>{73C7CF97-99FE-47DA-8E6A-9BEC5F39A3EC}</Project>
+      <Name>PersonRepository.Factory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PersonRepository.Interface\PersonRepository.Interface.csproj">
       <Project>{f13375dc-2550-4ccd-8ba3-d7b579ce5ae4}</Project>
       <Name>PersonRepository.Interface</Name>

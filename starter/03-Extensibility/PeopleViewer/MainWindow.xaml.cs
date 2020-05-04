@@ -1,5 +1,6 @@
 ﻿using PersonRepository.Interface;
 using System.Windows;
+using PersonRepository.Factory;
 
 namespace PeopleViewer
 {
@@ -12,17 +13,30 @@ namespace PeopleViewer
         }
         private void ServiceFetchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PopulateListBox("Service");
         }
 
         private void CSVFetchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PopulateListBox("CSV");
         }
 
         private void SQLFetchButton_Click(object sender, RoutedEventArgs e)
         {
+            PopulateListBox("SQL");
+        }
 
+        private void PopulateListBox(string repositoryType)
+        {
+            ClearListBox();
+            IPersonRepository repository = RepositoryFactory.GetRepository(repositoryType);
+            var people = repository.GetPeople();
+            foreach (var person in people)
+            {
+                PersonListBox.Items.Add(person);
+            }
+
+            ShowRepositoryType(repository);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -37,8 +51,7 @@ namespace PeopleViewer
 
         private void ShowRepositoryType(IPersonRepository repository)
         {
-            MessageBox.Show(string.Format("Repository Type:\n{0}",
-                repository.GetType().ToString()));
+            MessageBox.Show($"Repository Type:\n{repository.GetType()}");
         }
     }
 }
